@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Post } from './posts/entities/post.entity';
+import { AuthModule } from './auth/auth.module';
+import { User } from './auth/entities/user.entity';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -19,7 +21,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       username:'postgres',
       password:'MyNewPass123',
       database:'Youtube-nestjs',
-      entities:[Post],
+      entities:[Post,User],
       synchronize:true
     }),
     ObserveModule.forRoot({
@@ -28,6 +30,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       serviceId: 'project-name',
     }),
     PostsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
