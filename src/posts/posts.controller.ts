@@ -3,6 +3,7 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostExistsPipe } from './pipes/posts-exists';
 import { Post as PostEntity } from './entities/post.entity';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -31,7 +32,7 @@ export class PostsController {
     @Put(':id')
     async update(
         @Param("id",ParseIntPipe,PostExistsPipe) id:number,
-        @Body() updatePostData:CreatePostDto
+        @Body() updatePostData:UpdatePostDto
     ): Promise<PostEntity>{
         return this.postsservice.update(id,updatePostData);
     }

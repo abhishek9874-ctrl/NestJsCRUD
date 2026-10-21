@@ -75,7 +75,7 @@ export class AuthService {
             throw new UnauthorizedException("Invalid Credentials or user is not registerd !!!")
         }
 
-        const tokens= this.generateTokens(user);
+        const tokens=  this.generateTokens(user);
         const {password,...result}=user;
         return{
             user:result,
@@ -116,7 +116,7 @@ export class AuthService {
         return bcrypt.compare(plainPassword,hashedPassword)
     }
 
-    private async generateTokens(user:User){
+    private  generateTokens(user:User){
         return{
             accessToken:this.generateAccessToken(user),
             refreshToken:this.generateRefreshToken(user)
