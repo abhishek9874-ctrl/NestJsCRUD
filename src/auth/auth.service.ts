@@ -108,6 +108,21 @@ export class AuthService {
        }
     }
 
+    async getUserById(userId:number){
+        const user=await this.usersRepository.findOne({
+            where:{id:userId},
+        })
+
+        if(!user){
+            throw new UnauthorizedException('user not found')
+        }
+
+        const{password,...result}=user;
+        return result;
+
+
+    }
+
     private async hashPassword(password:string):Promise<string>{
         return bcrypt.hash(password,10);
     }
